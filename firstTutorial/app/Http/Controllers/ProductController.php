@@ -42,7 +42,7 @@ class ProductController extends Controller
     public function show(string $id): View|RedirectResponse
     {
         $viewData = [];
-        if ($id >= "5") {
+        if ($id > count(ProductController::$products)) {
             return redirect()->route("home.index");
         }
         $product = ProductController::$products[$id - 1];
@@ -63,7 +63,8 @@ class ProductController extends Controller
             "name" => "required",
             "price" => ["required","gt:0"],
         ]);
-        dd($request->all());
+        //dd($request->all());
         //here will be the code to call the model and save it to the database
+        return view("product.save");
     }
 }
